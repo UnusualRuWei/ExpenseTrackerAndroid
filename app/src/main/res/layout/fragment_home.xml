@@ -184,6 +184,7 @@
                 android:elevation="10dp"
                 android:text="This week"
                 android:textSize="10sp"
+                android:textColor="@color/black"
                 android:background="@drawable/layout_roundcorners"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

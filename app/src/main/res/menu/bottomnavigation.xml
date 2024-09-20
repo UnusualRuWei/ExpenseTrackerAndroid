@@ -4,7 +4,7 @@
     <item
         android:id="@+id/nav_expense"
         android:title="Expense"
-        android:icon="@drawable/ic_expense_24"/>
+        android:icon="@drawable/ic_expense_24" />
     <item
         android:id="@+id/nav_profile"
         android:title="Profile"
