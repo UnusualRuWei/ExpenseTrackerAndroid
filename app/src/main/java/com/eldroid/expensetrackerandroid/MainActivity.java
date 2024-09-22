@@ -19,6 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private FloatingActionButton fab;
+    private boolean isFabVisible = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
 
         binding.bottomNavView.setBackground(null);
+
+
+
+
     }
 
     private void replaceFragment(Fragment fragment){

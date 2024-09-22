@@ -11,15 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userprofileimageholder"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_margin="20dp"
             android:elevation="10dp"
-            android:src="@drawable/ic_profile_24"
+            android:src="@drawable/budgetbgimg"
             android:backgroundTint="@color/white"
-            android:background="@drawable/layout_roundcorners"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,10 +36,22 @@
             app:layout_constraintTop_toBottomOf="@+id/userprofileimageholder" />
 
         <TextView
+            android:id="@+id/expense_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₱"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/expense_total"
+            app:layout_constraintEnd_toStartOf="@+id/expense_total"
+            app:layout_constraintTop_toBottomOf="@+id/expense_title" />
+
+        <TextView
             android:id="@+id/expense_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Php 200,000"
+            android:text="200,000.00"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="32sp"
@@ -91,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:text="Budget"
                     android:textSize="12sp"
-                    android:textColor="@color/buttoncolor"
+                    android:textColor="@color/grey"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -115,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:text="Expense"
                     android:textSize="12sp"
-                    android:textColor="@color/buttoncolor"
+                    android:textColor="@color/grey"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -139,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:text="Category"
                     android:textSize="12sp"
-                    android:textColor="@color/buttoncolor"
+                    android:textColor="@color/grey"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -172,7 +183,8 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <TextSwitcher
+                android:id="@+id/reportgenstatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

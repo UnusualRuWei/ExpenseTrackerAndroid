@@ -1,64 +1,72 @@
 package com.eldroid.expensetrackerandroid;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextSwitcher;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BudgetPlanningFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
+
 public class BudgetPlanningFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public BudgetPlanningFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BudgetPlanningFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BudgetPlanningFragment newInstance(String param1, String param2) {
-        BudgetPlanningFragment fragment = new BudgetPlanningFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ImageButton backButton;
+    private TextSwitcher textSwitcher;
+    private String[] texts = {"Day", "Month", "Year"};
+    private int currentIndex = 0;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_budget_planning, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_budget_planning, container, false);
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.expensivecostlistview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        List<ExpenseItem> expenseItemList = new ArrayList<>();
+        expenseItemList.add(new ExpenseItem("Cake", "Php 500", "01-01-2024"));
+        expenseItemList.add(new ExpenseItem("Water", "Php 400", "01-02-2024"));
+
+        ExpenseAdapter expenseAdapter = new ExpenseAdapter(expenseItemList);
+        recyclerView.setAdapter(expenseAdapter);
+
+        textSwitcher = rootView.findViewById(R.id.daymonthyearcategorybutton);
+        textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                TextView textView = new TextView(getContext());
+                textView.setGravity(Gravity.CENTER);
+                textView.setTextSize(12);
+                textView.setTextColor(getResources().getColor(R.color.black));
+                textView.setText(texts[currentIndex]);
+                return textView;
+            }
+        });
+
+        textSwitcher.setOnClickListener(v -> {
+            currentIndex = (currentIndex + 1) % texts.length;
+            textSwitcher.setText(texts[currentIndex]);
+        });
+
+        backButton = rootView.findViewById(R.id.budgetbackbutton); // Adjust the ID if necessary
+
+        backButton.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.popBackStack(); // Go back to the previous fragment
+        });
+
+        return rootView;
     }
 }

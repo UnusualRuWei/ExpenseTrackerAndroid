@@ -12,7 +12,9 @@
     <FrameLayout
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="47dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_navigation"
